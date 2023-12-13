@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="16dp" 
+tools:context=".MainActivity"> 
+ 
+<TextView 
+    android:layout_width="wrap_content"     android:layout_height="wrap_content"     android:text="Hello, Android!"     android:textSize="24sp" /> 
+</LinearLayout> 
+
+//////MainActivity.kt code: ///
+
+package com.example.myapplication 
+ 
+import android.os.Bundle import android.widget.Toast 
+import androidx.activity.ComponentActivity import androidx.activity.compose.setContent import androidx.compose.foundation.layout.fillMaxSize import androidx.compose.material3.MaterialTheme import androidx.compose.material3.Surface import androidx.compose.material3.Text import androidx.compose.runtime.Composable import androidx.compose.ui.Modifier 
+import androidx.compose.ui.tooling.preview.Preview 
+import com.example.myapplication.ui.theme.MyApplicationTheme 
+ 
+class MainActivity : ComponentActivity() { 
+    override fun onCreate(savedInstanceState: Bundle?) {         super.onCreate(savedInstanceState)         setContent { 
+            MyApplicationTheme {                 Surface( 
+                    modifier = Modifier.fillMaxSize(), 
+                    color = MaterialTheme.colorScheme.background 
+                ) { 
+                    Greeting("Android") 
+                } 
+            } 
+        } 
+        Toast.makeText(this, "ACTIVITY CREATED", Toast.LENGTH_SHORT).show()
+    } 
+ 
+    override fun onStart() {         super.onStart() 
+        Toast.makeText(this, "ACTIVITY STARTED", Toast.LENGTH_SHORT).show()
+    }  
+    override fun onResume() {         super.onResume() 
+        Toast.makeText(this, "ACTIVITY RESUMED", Toast.LENGTH_SHORT).show()
+    }  
+    override fun onPause() {         super.onPause() 
+        Toast.makeText(this, "ACTIVITY PAUSED", Toast.LENGTH_SHORT).show() 
+    }  
+    override fun onStop() {         super.onStop() 
+        Toast.makeText(this, "ACTIVITY STOPPED", Toast.LENGTH_SHORT).show()
+    }  
+    override fun onDestroy() {         super.onDestroy() 
+        Toast.makeText(this, "ACTIVITY DESTROYED", 
+Toast.LENGTH_SHORT).show() 
+    } 
+ 
+    @Composable 
+    fun Greeting(name: String, modifier: Modifier = Modifier) {         Text( 
+            text = "Hello $name!",             modifier = modifier 
+        ) 
+    } 
+ 
+    @Preview(showBackground = true) 
+    @Composable 
+    fun GreetingPreview() {         MyApplicationTheme { 
+            Greeting("Android") 
+        } 
+    } 
+} 
