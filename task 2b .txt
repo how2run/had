@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"     xmlns:app="http://schemas.android.com/apk/res-auto"     xmlns:tools="http://schemas.android.com/tools"     android:layout_width="match_parent"     android:layout_height="match_parent"     android:orientation="vertical"     android:padding="16dp" 
+    tools:context=".MainActivity"> 
+ 
+ 
+    <ImageView 
+        android:id="@+id/myImg" 
+        android:layout_width="match_parent"         android:layout_height="400dp"         android:src="@drawable/day" /> 
+ 
+    <Button 
+        android:id="@+id/click" 
+        android:layout_width="wrap_content"         android:layout_height="wrap_content"         android:text="Change Image"/> 
+</LinearLayout> 
+
+
+//MainActivity.kt code: //
+package com.example.myapplication 
+ 
+import android.os.Bundle 
+import androidx.activity.ComponentActivity import androidx.activity.compose.setContent import androidx.compose.foundation.Image import androidx.compose.foundation.background import androidx.compose.foundation.layout.* 
+import androidx.compose.foundation.text.BasicTextField import androidx.compose.foundation.text.KeyboardActions 
+import androidx.compose.foundation.text.KeyboardActions.Companion.Default import androidx.compose.foundation.text.KeyboardOptions import androidx.compose.material3.* import androidx.compose.runtime.* import androidx.compose.ui.Alignment import androidx.compose.ui.Modifier import androidx.compose.ui.graphics.Color import androidx.compose.ui.res.painterResource import androidx.compose.ui.text.input.ImeAction import androidx.compose.ui.tooling.preview.Preview import androidx.compose.ui.unit.dp 
+import com.example.myapplication.ui.theme.MyApplicationTheme 
+ 
+class MainActivity : ComponentActivity() { 
+
+    override fun onCreate(savedInstanceState: Bundle?) {         super.onCreate(savedInstanceState)         setContent { 
+            MyApplicationTheme { 
+                // A surface container using the 'background' color from the theme 
+                Surface( 
+                    modifier = Modifier.fillMaxSize(), 
+                    color = MaterialTheme.colorScheme.background 
+                ) { 
+                    ImageSwitcher() 
+                } 
+            } 
+        } 
+    } 
+} 
+ 
+@Composable fun ImageSwitcher() { 
+    var flag by remember { mutableStateOf(1) }  
+    Column( 
+        modifier = Modifier             .fillMaxSize()             .padding(16.dp), 
+        verticalArrangement = Arrangement.Center, 
+        horizontalAlignment = Alignment.CenterHorizontally 
+    ) { 
+        val imageRes = if (flag == 1) { 
+            R.drawable.day 
+        } else { 
+            R.drawable.night 
+        } 
+ 
+        Image( 
+            painter = painterResource(id = imageRes),             contentDescription = null,             modifier = Modifier 
+                .size(450.dp) 
+                .background(MaterialTheme.colorScheme.background) 
+        ) 
+ 
+        Spacer(modifier = Modifier.height(16.dp)) 
+ 
+        Button(             onClick = {                 flag = if (flag == 1) 2 else 1 
+            }, 
+            modifier = Modifier                 .fillMaxWidth() 
+        ) { 
+            Text(text = "Change Image") 
+        } 
+    } 
+} 
+ 
+@Preview(showBackground = true) 
+@Composable 
+fun ImageSwitcherPreview() { 
+    MyApplicationTheme {         ImageSwitcher() 
+}}
